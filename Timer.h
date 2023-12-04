@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <math.h>
 #include <SFML/Graphics.hpp>
 
 using namespace std;
@@ -10,7 +11,7 @@ class Timer {
 private:
 	Clock clock;
 	Time elapsed;
-	Time startTime = seconds(60);
+	Time startTime;
 	Time pausedTime;
 	bool isTimerPaused;
 
@@ -27,7 +28,7 @@ public:
 	int firstDigit = 0;
 	int secondDigit = 0;
 
-	Timer(float x, float y);
+	Timer(float x, float y, int startingTime);
 
 	void setFirstTexture(string fileName);
 	void setSecondTexture(string fileName);

@@ -1,4 +1,7 @@
 #pragma once
+#include <vector>
+#include <iostream>
+#include <list>
 
 
 using namespace std;
@@ -52,7 +55,7 @@ public:
 		int hash = this->getHashCode(word);
 		Table[hash].push_back(word);
 		size++;
-		
+
 		//See the rehash function
 		rehash();
 
@@ -70,6 +73,5 @@ public:
 		return false;
 	}
 
-	
-};
 
+};

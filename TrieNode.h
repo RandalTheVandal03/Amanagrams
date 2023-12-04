@@ -1,4 +1,7 @@
 #pragma once
+#include <string>
+#include <vector>
+
 using namespace std;
 struct TrieNode {
 
@@ -63,4 +66,3 @@ struct TrieNode {
 
     }
 };
-

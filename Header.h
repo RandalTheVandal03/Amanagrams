@@ -44,9 +44,9 @@ void showRules(bool& rules_r_open, Font font) {
     string infotxt = "1.  Use the letters given\n"
         "\tto create words up to\n"
         "\t6 characters in length\n\n"
-        "3.  You can use a letter as\n"
+        "2.  You can use a letter as\n"
         "\tmany times as you want\n\n"
-        "4.  Do not repeat words\n\n\n"
+        "3.  Do not repeat words\n\n\n"
         "\t\tGood Luck!!";
 
     info.setCharacterSize(18);
