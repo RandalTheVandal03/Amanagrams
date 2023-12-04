@@ -1,4 +1,5 @@
 #pragma once
+using namespace std;
 struct TrieNode {
 
     //Basic variables that can be modified at will
