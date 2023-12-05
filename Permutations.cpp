@@ -1,26 +1,28 @@
 #include "Permutations.h"
 
+// Function that Returns a 2D Vector of Calculated Permutations
 vector<vector<string>> Permutations::permutations(vector<string> letters) {
-    //Modifiable Variables
+    // Modifiable Variables
     int size = 6;
     int permNum = 6;
     int index = 0;
 
-    //Initializes the list with the base letters
+    // Initializes the list with the base letters
     vector<vector<string>> permList;
     permList.push_back(letters);
 
 
     for (int x = 1; x < permNum; x++) {
         vector<string> temp;
-        //Goes through every letter given to the user and adds it to each of the previous size's permutation
+
+        // Goes through every letter given to the user and adds it to each of the previous size's permutation
         for (int j = 0; j < letters.size(); j++) {
             for (int y = 0; y < permList.at(index).size(); y++) {
                 temp.push_back(permList.at(index).at(y) + letters.at(j));
             }
         }
 
-        //increases the index and pushes the smaller list into the larger one
+        // Increases the index and pushes the smaller list into the larger one
         index++;
         permList.push_back(temp);
     }
@@ -31,14 +33,14 @@ vector<vector<string>> Permutations::permutations(vector<string> letters) {
 
 vector<vector<string>> Permutations::getPermutations() {
 
-    //Random Seed
+    // Random Seed
     srand(time(NULL));
 
     vector<string> vowels;
     vector<string> consonants;
     set<string> available;
 
-    //Establishes the entire alphabet, if there's a simpler solution, suggest
+    // Establishes the entire alphabet
     vowels.push_back("a");
     vowels.push_back("e");
     vowels.push_back("i");
@@ -105,9 +107,11 @@ vector<vector<string>> Permutations::getPermutations() {
     return orientations;
 }
 
+// Function Updates the Data Structures with the Word Options Based on the Letter Options
 void Permutations::updateWords(TrieNode& root, HashTable& hash, vector<vector<string>>& desiredOrientations,
     vector<vector<string>>& desiredTrie, vector<vector<string>>& desiredHash) {
 
+    // Passes the 2D Vectors of the Word Options for Each Data Structure by Reference to Modify them
     for (int x = 2; x < desiredOrientations.size(); x++) {
         vector<string> temp;
         for (int y = 0; y < desiredOrientations.at(x).size(); y++) {
