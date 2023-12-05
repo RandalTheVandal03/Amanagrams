@@ -1,20 +1,25 @@
 #include "Timer.h"
 
+// Timer Constructor Definition
 Timer::Timer(float x, float y, int startingTime) {
 
     isTimerPaused = false;
 
+    // Calls the Below Functions
     setPositions(x - 16, y);
     setFirstTexture("PNGs/digits.png");
     setSecondTexture("PNGs/digits.png");
 
+    // Sets the Texture Border of the Digits Asset to get the Correct Number
     firstDigitSprite.setTextureRect(sf::IntRect(0 + 21 * firstDigit, 0, 21, 32));
     secondDigitSprite.setTextureRect(sf::IntRect(0 + 21 * secondDigit, 0, 21, 32));
 
+    // Sets the Counter Starting Time based on the Constructor Value
     startTime = seconds(startingTime);
 
 }
 
+// Function Sets the First Digit's Sprite's Texture
 void Timer::setFirstTexture(string fileName) {
 
     firstDigitTexture.loadFromFile(fileName);
@@ -22,6 +27,7 @@ void Timer::setFirstTexture(string fileName) {
 
 }
 
+// Function Sets the Second Digit's Sprite's Texture
 void Timer::setSecondTexture(string fileName) {
 
     secondDigitTexture.loadFromFile(fileName);
@@ -29,6 +35,7 @@ void Timer::setSecondTexture(string fileName) {
 
 }
 
+// Function Sets the First and Second Digits' Sprite's Positions
 void Timer::setPositions(float x, float y) {
 
     firstDigitPosition.x = x;
@@ -39,6 +46,7 @@ void Timer::setPositions(float x, float y) {
 
 }
 
+// Function Sets the First Digit's Sprite
 void Timer::setFirstSprite() {
 
     firstDigitSprite = sf::Sprite(firstDigitTexture);
@@ -47,6 +55,7 @@ void Timer::setFirstSprite() {
 
 }
 
+// Function Sets the Second Digit's Sprite
 void Timer::setSecondSprite() {
 
     secondDigitSprite = sf::Sprite(secondDigitTexture);
@@ -55,13 +64,18 @@ void Timer::setSecondSprite() {
 
 }
 
+// Function used to Continuously Update the Timer
 void Timer::updateTimer() {
 
+    // Checks whether the Timer is Paused or Not
     if (!(isTimerPaused)) {
+
+        // Calculates the Elapsed Time based on the Start Time and Clock Elapsed Time
         elapsed = (startTime - clock.getElapsedTime());
 
         int tempSeconds = floor(elapsed.asSeconds());
 
+        // Updates the Counter Digits if the Timer Has At Least 0 Seconds on it
         if (tempSeconds >= 0) {
 
             string secondsString = to_string(tempSeconds);
@@ -82,6 +96,7 @@ void Timer::updateTimer() {
             firstDigitSprite.setTextureRect(sf::IntRect(0 + 21 * firstDigit, 0, 21, 32));
             secondDigitSprite.setTextureRect(sf::IntRect(0 + 21 * secondDigit, 0, 21, 32));
 
+        // Paused the Timer once 0 Seconds is Reached
         } else {
 
             setPaused(true);
@@ -91,6 +106,7 @@ void Timer::updateTimer() {
     }
 }
 
+// Function Sets the Paused Time of the Timer
 void Timer::setPausedTime() {
 
     if (isTimerPaused) {
@@ -101,25 +117,29 @@ void Timer::setPausedTime() {
 
 }
 
+// Function Returns the Timer's Pause State
 bool Timer::getTimerPausedState() {
 
     return isTimerPaused;
 
 }
 
+// Function Sets the Pause State for the Timer
 void Timer::setPaused(bool pauseState) {
 
     isTimerPaused = pauseState;
 
 }
 
+// Function Restarts the Clock Object
 void Timer::restartTimer() {
 
     clock.restart();
 
 }
 
-sf::Time Timer::getElapsedTime() {
+// Function Returns the Elapsed Time
+Time Timer::getElapsedTime() {
 
     return elapsed;
 
