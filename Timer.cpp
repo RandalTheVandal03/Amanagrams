@@ -82,8 +82,7 @@ void Timer::updateTimer() {
             firstDigitSprite.setTextureRect(sf::IntRect(0 + 21 * firstDigit, 0, 21, 32));
             secondDigitSprite.setTextureRect(sf::IntRect(0 + 21 * secondDigit, 0, 21, 32));
 
-        }
-        else {
+        } else {
 
             setPaused(true);
 
