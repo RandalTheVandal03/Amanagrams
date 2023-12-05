@@ -1,8 +1,10 @@
 #include "GameWindow.h"
+#include "WelcomeWindow.h"
 #include "Timer.h"
+#include "Permutations.h"
 
 GameWindow::GameWindow(RenderWindow& desiredWindow, Font desiredFont, map<string, Texture> desiredTextures,
-    vector<vector<string>> desiredOrientations, vector<vector<string>> desiredWords, 
+    vector<vector<string>> desiredOrientations, vector<vector<string>> desiredWords,
     vector<vector<string>> desiredTrie, vector<vector<string>> desiredHash, int time) {
 
     gameWindow = &desiredWindow;
@@ -203,49 +205,49 @@ void GameWindow::open() {
 
                 if (gameEvent.type == Event::MouseButtonPressed) {
                     switch (gameEvent.mouseButton.button) {
-                        case Mouse::Left: {
-                            Vector2i pos = Mouse::getPosition(*gameWindow);
-                            if ((pos.x >= s1g.left) && (pos.x <= (s1g.left + s1g.width)) && (pos.y >= s1g.top) &&
-                                (pos.y <= (s1g.top + s1g.height))) {
-                                if (input.length() < 6) {
-                                    input += orientations.at(0).at(0)[0];
-                                }
-                            }
-                            else if ((pos.x >= s2g.left) && (pos.x <= (s2g.left + s2g.width)) && (pos.y >= s2g.top) &&
-                                (pos.y <= (s2g.top + s2g.height))) {
-                                if (input.length() < 6) {
-                                    input += orientations.at(0).at(1)[0];
-                                }
-                            }
-                            else if ((pos.x >= s3g.left) && (pos.x <= (s3g.left + s3g.width)) && (pos.y >= s3g.top) &&
-                                (pos.y <= (s3g.top + s3g.height))) {
-                                if (input.length() < 6) {
-                                    input += orientations.at(0).at(2)[0];
-                                }
-                            }
-                            else if ((pos.x >= s4g.left) && (pos.x <= (s4g.left + s4g.width)) && (pos.y >= s4g.top) &&
-                                (pos.y <= (s4g.top + s4g.height))) {
-                                if (input.length() < 6) {
-                                    input += orientations.at(0).at(3)[0];
-                                }
-                            }
-                            else if ((pos.x >= s5g.left) && (pos.x <= (s5g.left + s5g.width)) && (pos.y >= s5g.top) &&
-                                (pos.y <= (s5g.top + s5g.height))) {
-                                if (input.length() < 6) {
-                                    input += orientations.at(0).at(4)[0];
-                                }
-                            }
-                            else if ((pos.x >= s6g.left) && (pos.x <= (s6g.left + s6g.width)) && (pos.y >= s6g.top) &&
-                                (pos.y <= (s6g.top + s6g.height))) {
-                                if (input.length() < 6) {
-                                    input += orientations.at(0).at(5)[0];
-                                }
-                            }
-                            else if ((pos.x >= sbg.left) && (pos.x <= (sbg.left + sbg.width)) && (pos.y >= sbg.top) &&
-                                (pos.y <= (sbg.top + sbg.height))) {
-                                random_shuffle(orientations.at(0).begin(), orientations.at(0).end());
+                    case Mouse::Left: {
+                        Vector2i pos = Mouse::getPosition(*gameWindow);
+                        if ((pos.x >= s1g.left) && (pos.x <= (s1g.left + s1g.width)) && (pos.y >= s1g.top) &&
+                            (pos.y <= (s1g.top + s1g.height))) {
+                            if (input.length() < 6) {
+                                input += orientations.at(0).at(0)[0];
                             }
                         }
+                        else if ((pos.x >= s2g.left) && (pos.x <= (s2g.left + s2g.width)) && (pos.y >= s2g.top) &&
+                            (pos.y <= (s2g.top + s2g.height))) {
+                            if (input.length() < 6) {
+                                input += orientations.at(0).at(1)[0];
+                            }
+                        }
+                        else if ((pos.x >= s3g.left) && (pos.x <= (s3g.left + s3g.width)) && (pos.y >= s3g.top) &&
+                            (pos.y <= (s3g.top + s3g.height))) {
+                            if (input.length() < 6) {
+                                input += orientations.at(0).at(2)[0];
+                            }
+                        }
+                        else if ((pos.x >= s4g.left) && (pos.x <= (s4g.left + s4g.width)) && (pos.y >= s4g.top) &&
+                            (pos.y <= (s4g.top + s4g.height))) {
+                            if (input.length() < 6) {
+                                input += orientations.at(0).at(3)[0];
+                            }
+                        }
+                        else if ((pos.x >= s5g.left) && (pos.x <= (s5g.left + s5g.width)) && (pos.y >= s5g.top) &&
+                            (pos.y <= (s5g.top + s5g.height))) {
+                            if (input.length() < 6) {
+                                input += orientations.at(0).at(4)[0];
+                            }
+                        }
+                        else if ((pos.x >= s6g.left) && (pos.x <= (s6g.left + s6g.width)) && (pos.y >= s6g.top) &&
+                            (pos.y <= (s6g.top + s6g.height))) {
+                            if (input.length() < 6) {
+                                input += orientations.at(0).at(5)[0];
+                            }
+                        }
+                        else if ((pos.x >= sbg.left) && (pos.x <= (sbg.left + sbg.width)) && (pos.y >= sbg.top) &&
+                            (pos.y <= (sbg.top + sbg.height))) {
+                            random_shuffle(orientations.at(0).begin(), orientations.at(0).end());
+                        }
+                    }
                     }
                 }
 
@@ -256,7 +258,8 @@ void GameWindow::open() {
                     currsBounds.width / 2.0f, currsBounds.height / 2.0f);
                 currScore.setPosition((gameWindow->getSize().x / 2.0f), (gameWindow->getSize().y / 2.0f - 35));
 
-            } else {
+            }
+            else {
 
                 gameWindow->close();
                 RenderWindow endwindow(VideoMode((25 * 16), (16 * 16) + 50), "Times Up", Style::Close);
@@ -292,7 +295,8 @@ void GameWindow::open() {
                 trophy.setScale(.20f, .20f);
                 Rect<float> trobounds = trophy.getGlobalBounds();
                 trophy.setOrigin(trobounds.width / 2.0f, trobounds.height / 2.0f);
-                trophy.setPosition(((endwindow.getSize().x) / 2.0f), (((endwindow.getSize().y) / 2.0f) + 10));
+                trophy.setPosition(((endwindow.getSize().x) / 2.0f) - 37.5, (((endwindow.getSize().y) / 2.0f) + 27.5));
+                trobounds = trophy.getGlobalBounds();
 
                 while (endwindow.isOpen()) {
                     Event endEvent;
@@ -311,14 +315,16 @@ void GameWindow::open() {
                                     Vector2i pos = Mouse::getPosition(endwindow);
                                     if ((pos.x >= trobounds.left) && (pos.x <= (trobounds.left + trobounds.width)) && (pos.y >= trobounds.top) &&
                                         (pos.y <= (trobounds.top + trobounds.height))) {
-                                        cout << "Clicked" << endl;
 
                                         endwindow.close();
                                         sf::RenderWindow welcomeWindow(sf::VideoMode(25 * 32, 16 * 32), "Amanagrams", sf::Style::Close);
                                         welcomeWindow.setMouseCursorVisible(true);
+
+                                        Permutations newPermutation;
+                                        orientations = newPermutation.getPermutations();
                                         WelcomeWindow mainWindow(welcomeWindow, font, textures, orientations, trieLegalWords, hashLegalWords);
                                         mainWindow.open();
-           
+
                                     }
 
                                 }

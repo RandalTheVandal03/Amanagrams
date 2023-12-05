@@ -225,7 +225,7 @@ void WelcomeWindow::open() {
 }
 
 void WelcomeWindow::showRules(bool& rules_r_open, Font font) {
-    RenderWindow ruleswindow(VideoMode((25 * 16), (16 * 16) + 50), "How to Play", Style::Close);
+    RenderWindow ruleswindow(VideoMode((25 * 20), (16 * 20) + 50), "How to Play", Style::Close);
     ruleswindow.setMouseCursorVisible(true);
 
     Text title;
@@ -236,17 +236,19 @@ void WelcomeWindow::showRules(bool& rules_r_open, Font font) {
     title.setStyle(Text::Bold | Text::Underlined);
     Rect<float> tbounds = title.getLocalBounds();
     title.setOrigin(tbounds.width / 2.0f, tbounds.height / 2.0f);
-    title.setPosition((ruleswindow.getSize().x / 2.0f), ((ruleswindow.getSize().y / 2.0f) - 120));
+    title.setPosition((ruleswindow.getSize().x / 2.0f), ((ruleswindow.getSize().y / 2.0f) - 150));
     Text info;
     info.setFont(font);
 
-    string infotxt = "1.  Use the letters given\n"
-        "\tto create words up to\n"
-        "\t6 characters in length\n\n"
-        "2.  You can use a letter as\n"
-        "\tmany times as you want\n\n"
-        "3.  Do not repeat words\n\n\n"
-        "\t\tGood Luck!!";
+    string infotxt = 
+        "1.  Use the letters given to create\n"
+        "\twords up to 6 characters in length.\n\n"
+        "2.  You can use a letter as many times\n"
+        "\tas you want.\n\n"
+        "3.  You cannot repeat words.\n\n"
+        "4.  Press Backspace to delete a letter.\n\n"
+        "5.  Press Enter to confirm words.\n\n\n"
+        "\t\t\tGood Luck!!";
 
     info.setCharacterSize(18);
     info.setStyle(Text::Bold);
