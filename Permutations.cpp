@@ -104,3 +104,27 @@ vector<vector<string>> Permutations::getPermutations() {
 
     return orientations;
 }
+
+void Permutations::updateWords(TrieNode& root, HashTable& hash, vector<vector<string>>& desiredOrientations,
+    vector<vector<string>>& desiredTrie, vector<vector<string>>& desiredHash) {
+
+    for (int x = 2; x < desiredOrientations.size(); x++) {
+        vector<string> temp;
+        for (int y = 0; y < desiredOrientations.at(x).size(); y++) {
+            if (root.search(desiredOrientations.at(x).at(y), root)) {
+                temp.push_back(desiredOrientations.at(x).at(y));
+            }
+        }
+        desiredTrie.push_back(temp);
+    }
+
+    for (int x = 2; x < desiredOrientations.size(); x++) {
+        vector<string> temp;
+        for (int y = 0; y < desiredOrientations.at(x).size(); y++) {
+            if (hash.search(desiredOrientations.at(x).at(y))) {
+                temp.push_back(desiredOrientations.at(x).at(y));
+            }
+        }
+        desiredHash.push_back(temp);
+    }
+}

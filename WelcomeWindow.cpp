@@ -1,8 +1,10 @@
 #include "WelcomeWindow.h"
 #include "GameWindow.h"
+#include "Permutations.h"
 
-WelcomeWindow::WelcomeWindow(RenderWindow& desiredWindow, Font desiredFont, map<string, Texture> desiredTextures,
-    vector<vector<string>> desiredOrientations, vector<vector<string>> desiredTrie, vector<vector<string>> desiredHash) {
+WelcomeWindow::WelcomeWindow(RenderWindow& desiredWindow, 
+    Font desiredFont, map<string, Texture>& desiredTextures,
+    vector<vector<string>>& desiredOrientations, vector<vector<string>>& desiredTrie, vector<vector<string>>& desiredHash) {
 
 	welcomeWindow = &desiredWindow;
 	font = desiredFont;
@@ -248,7 +250,7 @@ void WelcomeWindow::showRules(bool& rules_r_open, Font font) {
         "3.  You cannot repeat words.\n\n"
         "4.  Press Backspace to delete a letter.\n\n"
         "5.  Press Enter to confirm words.\n\n\n"
-        "\t\t\tGood Luck!!";
+        "\t\t\t   Good Luck!!";
 
     info.setCharacterSize(18);
     info.setStyle(Text::Bold);

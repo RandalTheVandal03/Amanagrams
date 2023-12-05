@@ -23,6 +23,8 @@ int main()
     HashTable hash;
     ifstream dictionary;
     vector<vector<string>> orientations;
+    vector<vector<string>> trieLegalWords;
+    vector<vector<string>> hashLegalWords;
 
     //Opens up the dictionary for reading
     dictionary.open("enable1.txt", ios::out);
@@ -44,33 +46,10 @@ int main()
     }
 
     //Gets all the permutations with the randomly generated letters
+    cout << "Start of Load" << endl;
     Permutations permutation;
     orientations = permutation.getPermutations();
-    vector<vector<string>> trieLegalWords;
-    vector<vector<string>> hashLegalWords;
-
-    cout << "Start of Load" << endl;
-    //Checks all the legal words from the list of permutations (THIS IS FOR TRIES, A NEW VERSION OF THIS WILL BE MADE WHEN WE MAKE HASH)
-    for (int x = 2; x < orientations.size(); x++) {
-        vector<string> temp;
-        for (int y = 0; y < orientations.at(x).size(); y++) {
-            if (root.search(orientations.at(x).at(y), root)) {
-                temp.push_back(orientations.at(x).at(y));
-            }
-        }
-        trieLegalWords.push_back(temp);
-    }
-
-    for (int x = 2; x < orientations.size(); x++) {
-        vector<string> temp;
-        for (int y = 0; y < orientations.at(x).size(); y++) {
-            if (hash.search(orientations.at(x).at(y))) {
-                temp.push_back(orientations.at(x).at(y));
-            }
-        }
-        hashLegalWords.push_back(temp);
-    }
-
+    permutation.updateWords(root, hash, orientations, trieLegalWords, hashLegalWords);
     cout << "Done Loading Both Data Structures!" << endl;
 
     map<string, Texture> textures = loadtextures();

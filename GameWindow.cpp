@@ -3,9 +3,9 @@
 #include "Timer.h"
 #include "Permutations.h"
 
-GameWindow::GameWindow(RenderWindow& desiredWindow, Font desiredFont, map<string, Texture> desiredTextures,
-    vector<vector<string>> desiredOrientations, vector<vector<string>> desiredWords,
-    vector<vector<string>> desiredTrie, vector<vector<string>> desiredHash, int time) {
+GameWindow::GameWindow(RenderWindow& desiredWindow, Font desiredFont, map<string, Texture>& desiredTextures,
+    vector<vector<string>>& desiredOrientations, vector<vector<string>>& desiredWords,
+    vector<vector<string>>& desiredTrie, vector<vector<string>>& desiredHash, int time) {
 
     gameWindow = &desiredWindow;
     font = desiredFont;
@@ -32,6 +32,7 @@ void GameWindow::open() {
 
 
     Timer* timer = new Timer(((gameWindow->getSize().x / 2.0f) + 330), 30, counterTime);
+    userWords.clear();
 
     string input = "";
     Text currentWord;
@@ -69,8 +70,6 @@ void GameWindow::open() {
     currScore.setCharacterSize(20);
     currScore.setFillColor(Color(254, 225, 43));
     currScore.setStyle(Text::Bold);
-
-    vector<string> userWords;
 
     while (gameWindow->isOpen()) {
 
@@ -162,7 +161,7 @@ void GameWindow::open() {
                 }
 
                 if ((gameEvent.type == sf::Event::KeyPressed) && (gameEvent.key.code == sf::Keyboard::Enter)) {
-
+                    
                     bool validWord = false;
 
                     if (input.length() > 2) {
@@ -172,7 +171,6 @@ void GameWindow::open() {
                             if (input == legalWords.at(input.length() - 3).at(x)) {
 
                                 validWord = true;
-
 
                                 for (int y = 0; y < userWords.size(); y++) {
 
@@ -338,7 +336,6 @@ void GameWindow::open() {
                     endwindow.draw(info);
                     endwindow.draw(title);
                     endwindow.draw(trophy);
-
                     endwindow.display();
                 }
 
